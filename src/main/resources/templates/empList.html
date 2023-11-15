@@ -1,0 +1,16 @@
+<table border="1">
+  <tr>
+    <td>사원번호</td>
+    <td>이름</td>
+    <td>휴대폰번호</td>
+    <td>입사일자</td>
+  </tr>
+  <tr th:each="emp : ${list}">
+    <td>[[ ${emp.employeeId} ]]</td>
+    <td>[[ ${emp.firstName} ]]</td>
+    <td>[[ ${emp.phoneNumber} ]]</td>
+    <td>[[ ${emp.hireDate} ]]</td>
+    <td>[[ ${#temporals.format(emp.hireDate, 'yyyy-MM-dd HH:mm')} ]]</td>
+    
+  </tr>
+</table>

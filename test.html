@@ -1,0 +1,23 @@
+<body>
+  <form action="http://localhost:8080/upload1"
+        method="post"
+        enctype="multipart/form-data">
+
+    <input type="text" name="a">
+    <input type="file" name="b">
+    <input type="file" multiple name="c">
+    <input type="file" multiple name="d">
+    
+    <button type="button">추가</button>
+    <button>업로드</button>
+  </form>
+  <script>
+    const btn = document.querySelector('[type=button]');
+    const form = document.querySelector('form');
+    let num = 0;
+    btn.addEventListener('click', () => {
+      let input = `<input type="file" multiple name="file${++num}">`;
+      form.insertAdjacentHTML( "beforeend", input);
+    });
+  </script>
+</body>

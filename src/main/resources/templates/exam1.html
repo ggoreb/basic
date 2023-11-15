@@ -1,0 +1,5 @@
+<ul>
+  <li th:each="dept : ${location.departments}"
+      th:text="${dept.departmentName} + ' (' + ${#lists.size(dept.employees)} + ')'">
+  </li>
+</ul>

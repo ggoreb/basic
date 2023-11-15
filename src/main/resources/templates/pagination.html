@@ -1,0 +1,27 @@
+<!--/* [[ ${page.abcd} ]] */-->
+
+<a th:if="${page > 10}"
+    th:href="@{/pagination(page=${page-10})}">[이전]</a>
+
+<th:block th:each="pageNumber : ${#numbers.sequence(startPage, endPage)}">
+
+  <a th:if="${page} == ${pageNumber}" th:text="${pageNumber}"
+      style="font-weight:bold"></a>
+
+  <a th:href="@{/pagination(page=${pageNumber})}"
+      th:unless="${page} == ${pageNumber}" 
+      th:text="${pageNumber}"></a>
+
+</th:block>
+
+<th:block th:if="${page == 11}">
+  <a th:href="@{/pagination(page=${page+10})}">[다음]</a>
+</th:block>
+
+
+<a th:if="${page == 11}" 
+   th:href="@{/pagination(page=${page+10})}">[다음]</a>
+
+<a th:unless="${page == 11}"
+  th:href="@{/pagination(page=${page+10})}"
+  style="color: red; font-weight: bold;">[다음]</a>

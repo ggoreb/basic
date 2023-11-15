@@ -1,0 +1,8 @@
+<p th:if="${session.user} != null"
+   th:text="${session.user.id} + '님 반갑습니다.'"></p>
+
+<p th:unless="${session.user} != null">
+  로그인되어 있지 않습니다.
+</p>
+
+[[ ${session.email} ]] / [[ ${session.age} ]]

@@ -1,0 +1,37 @@
+<form action="/join"
+      method="post">
+  ID: <input type="text" name="id"><br>
+  <p id="result-id"></p>
+  PW: <input type="text" name="pw"><br>
+  <p id="result-pw"></p>
+  NAME: <input type="text" name="name"><br>
+  <button>가입</button>
+</form>
+
+<script>
+  const id = document.querySelector("[name=id]");
+  id.addEventListener('blur', check);
+
+  async function check() {
+    const idValue = id.value;
+    const data = await fetch(`/joinAjax?id=${idValue}`);
+    const result = await data.text();
+    // alert(result);
+    const resultId = document.querySelector("#result-id");
+    if(result === 'true') {
+      resultId.innerHTML = '사용할 수 없는 아이디 입니다.';
+      // id.style.backgroundColor = 'red';
+      id.classList.add('no-valid');
+      id.classList.remove('yes-valid');
+    } else {
+      resultId.innerHTML = '';
+      // id.style.backgroundColor = 'white';
+      id.classList.add('yes-valid');
+      id.classList.remove('no-valid');
+    }
+  }
+</script>
+<style>
+  .no-valid { background-color: red; }
+  .yes-valid { background-color: white; }
+</style>

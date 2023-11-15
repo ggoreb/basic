@@ -1,0 +1,26 @@
+<form action="/login" method="post">
+  ID : <input type="text" name="id"><br>
+  PW : <input type="password" name="pw"><br>
+  <input type="submit" value="로그인">
+</form>
+<script>
+  const submit = document.querySelector("[type=submit]");
+  submit.addEventListener("click", login);
+  async function login(event) {
+    event.preventDefault();
+
+    const id = document.querySelector("[name=id]").value;
+    const pw = document.querySelector("[name=pw]").value;
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("pw", pw);
+
+    const data = await fetch("/login", {
+      method: 'post',
+      body: formData
+    });
+    const result = await data.text();
+    alert(result);
+    // document.body.innerHTML += result;
+  }
+</script>

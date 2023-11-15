@@ -1,0 +1,28 @@
+
+
+<ul>
+  <li th:each="player : ${list}" >
+    [[ ${player.playerName} ]]
+    ( [[ ${player.team.teamName} ]] )
+  </li>
+  
+</ul>
+
+<th:block th:each="pageNumber : ${#numbers.sequence(1, 10)}">
+  <span th:text="${pageNumber}"></span>
+  <span th:text="${pageNumber}"></span>
+</th:block>
+
+<table border="1">
+  <tr>
+    <td>아이디</td>
+    <td>이름</td>
+    <td>나이</td>
+  </tr>
+  <tr th:each="u : ${userList}">
+    <td th:text="${u.userId}"></td>
+    <td>[[ ${u.userName} ]]</td>
+    <td th:text="${u.userAge}"></td>
+  </tr>
+</table>
+<hr>

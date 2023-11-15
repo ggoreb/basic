@@ -1,0 +1,24 @@
+<form action="/team/add">
+  팀 아이디: <input type="text" name="teamId"><br>
+  팀 이름: <input type="text" name="teamName"><br>
+  <button>등록</button>
+</form>
+
+<script>
+  const button = document.querySelector("button");
+  button.addEventListener("click", add);
+  async function add(event) {
+    event.preventDefault();
+    const formData = new FormData();
+    const teamId = document.querySelector('[name=teamId]').value;
+    const teamName = document.querySelector('[name=teamName]').value;
+    formData.append('teamId', teamId);
+    formData.append('teamName', teamName);
+    const data = await fetch("/team/add", {
+      method: 'post',
+      body: formData
+    })
+    const result = await data.text();
+    alert(result);
+  }
+</script>
