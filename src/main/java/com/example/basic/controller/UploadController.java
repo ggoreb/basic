@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.basic.model.Article;
 import com.example.basic.model.FileInfo;
+import com.example.basic.repository.ArticleRepository;
 import com.fasterxml.jackson.core.util.ByteArrayBuilder;
 
 @Controller
@@ -32,13 +34,17 @@ public class UploadController {
     return "article/add";
   }
 
+  @Autowired
+  ArticleRepository articleRepository;
+
   @PostMapping("/article/add")
   public String articleAddPost(
     @ModelAttribute Article article,
     @RequestParam("file") MultipartFile mFile
   ) {
-    System.out.println(article);
-    System.out.println(mFile.getOriginalFilename());
+    String oName = mFile.getOriginalFilename();
+    article.setFileInfo(oName);
+    articleRepository.save(article);
     return "article/add";
   }
 
