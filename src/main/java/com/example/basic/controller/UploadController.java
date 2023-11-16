@@ -37,6 +37,8 @@ public class UploadController {
     @ModelAttribute Article article,
     @RequestParam("file") MultipartFile mFile
   ) {
+    System.out.println(article);
+    System.out.println(mFile.getOriginalFilename());
     return "article/add";
   }
 
