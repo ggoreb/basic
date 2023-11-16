@@ -47,7 +47,19 @@ public class UploadController {
     Date now = new Date();
     String date = sf.format(now);
 
+    // 나중에 추가해야 될 기능
+    // 1. 오늘 날짜 폴더 생성하기
+    // 2. 중복 파일명 처리하기
     String oName = mFile.getOriginalFilename();
+    
+    try {
+      mFile.transferTo(new File("c:/files/" + date + "/" + oName));
+    } catch (IllegalStateException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    
     article.setFileInfo("c:/files/" + date + "/" + oName);
     articleRepository.save(article);
     return "article/add";
