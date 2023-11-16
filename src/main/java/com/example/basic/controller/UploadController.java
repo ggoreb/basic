@@ -42,8 +42,13 @@ public class UploadController {
     @ModelAttribute Article article,
     @RequestParam("file") MultipartFile mFile
   ) {
+    SimpleDateFormat sf =
+          new SimpleDateFormat("yyyy-MM-dd");
+    Date now = new Date();
+    String date = sf.format(now);
+
     String oName = mFile.getOriginalFilename();
-    article.setFileInfo(oName);
+    article.setFileInfo("c:/files/" + date + "/" + oName);
     articleRepository.save(article);
     return "article/add";
   }
