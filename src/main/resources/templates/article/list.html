@@ -1,6 +1,6 @@
 <ul>
   <li th:each="article : ${list}">
     [[ ${article.title} ]] / 
-    [[ ${article.fileInfo} ]]
+    <img th:src="'/download?id=' + ${article.id}">
   </li>
 </ul>
