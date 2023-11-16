@@ -6,7 +6,10 @@
   <li th:each="article : ${list}">
     [[ ${article.title} ]] / 
     <a th:href="'/download?id=' + ${article.id}">
-      <img th:src="'/download?id=' + ${article.id}">
+      <img th:src="'/download?id=' + ${article.id}" 
+           onerror="this.src='/img/no-image.png'">
     </a>
   </li>
 </ul>
+
+<img src="/download?id=44">

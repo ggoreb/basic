@@ -29,7 +29,7 @@ public class DownloadController {
     
     Optional<Article> opt = 
         articleRepository.findById(id);
-    String fileInfo = "";
+    String fileInfo = "c:/files/no-image.png";
     if(opt.isPresent()) {
       Article article = opt.get();
       fileInfo = article.getFileInfo();
