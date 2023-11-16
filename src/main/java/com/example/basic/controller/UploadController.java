@@ -49,9 +49,21 @@ public class UploadController {
 
     // 나중에 추가해야 될 기능
     // 1. 오늘 날짜 폴더 생성하기
+    File f = new File("c:/files/" + date);
+    if(!f.exists()) {
+      f.mkdirs();
+    }
     // 2. 중복 파일명 처리하기
     String oName = mFile.getOriginalFilename();
     
+    File isFile = new File("c:/files/" + date + "/" + oName);
+    if(isFile.exists()) {
+      int 점의위치 = oName.lastIndexOf(".");
+      String 파일명 = oName.substring(0, 점의위치);
+      String 확장자 = oName.substring(점의위치);
+      oName = 파일명 + "__" + System.currentTimeMillis() + 확장자;
+    }
+
     try {
       mFile.transferTo(new File("c:/files/" + date + "/" + oName));
     } catch (IllegalStateException e) {
