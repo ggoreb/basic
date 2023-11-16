@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -57,15 +59,33 @@ public class UploadController {
     @RequestParam("file") MultipartFile mFile) {
     // 내일.. 중복파일이 존재하는지 검사
     // 업로드될 폴더가 없다면 폴더 생성
+    // a.jpg -> a.jpg48425987345
+    //          a48425987345.jpg
     String result = "";
     String oName = mFile.getOriginalFilename();
-    int 점의위치 = oName.indexOf(".");
-    String 파일명 = oName.substring(0, 점의위치);
-    String 확장자 = oName.substring(점의위치);
-    oName = 파일명 + "__" + System.currentTimeMillis() + 확장자;
+
+    SimpleDateFormat sf =
+          new SimpleDateFormat("yyyy-MM-dd");
+    Date now = new Date();
+    String date = sf.format(now);
+    System.out.println(date);
+
+    File f = new File("c:/files/" + date);
+    if(!f.exists()) {
+      f.mkdirs();
+    }
+
+    File isFile = new File("c:/files/" + date + "/" + oName);
+    if(isFile.exists()) {
+      int 점의위치 = oName.lastIndexOf(".");
+      String 파일명 = oName.substring(0, 점의위치);
+      String 확장자 = oName.substring(점의위치);
+      oName = 파일명 + "__" + System.currentTimeMillis() + 확장자;
+    }
 
     try {
-      mFile.transferTo(new File("c:/springboot/" + oName));
+      //                         c:/files/2023-11-16/a.jpg
+      mFile.transferTo(new File("c:/files/" + date + "/" + oName));
     } catch (IllegalStateException e) {
       e.printStackTrace();
     } catch (IOException e) {
