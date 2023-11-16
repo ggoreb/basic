@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,14 @@ import com.fasterxml.jackson.core.util.ByteArrayBuilder;
 
 @Controller
 public class UploadController {
+
+  @GetMapping("/article")
+  public String article(Model model) {
+    List<Article> list = 
+      articleRepository.findAll();
+    model.addAttribute("list", list);
+    return "article/list";
+  }
 
   @GetMapping("/article/add")
   public String articleAdd() {
