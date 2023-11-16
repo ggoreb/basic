@@ -27,7 +27,8 @@ public class DownloadController {
     @RequestParam int id
   ) throws Exception {
     
-    Optional<Article> opt = articleRepository.findById(id);
+    Optional<Article> opt = 
+        articleRepository.findById(id);
     String fileInfo = "";
     if(opt.isPresent()) {
       Article article = opt.get();

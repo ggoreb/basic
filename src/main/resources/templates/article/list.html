@@ -1,6 +1,12 @@
+<style>
+  img { width: 50px; }
+</style>
+
 <ul>
   <li th:each="article : ${list}">
     [[ ${article.title} ]] / 
-    <img th:src="'/download?id=' + ${article.id}">
+    <a th:href="'/download?id=' + ${article.id}">
+      <img th:src="'/download?id=' + ${article.id}">
+    </a>
   </li>
 </ul>
