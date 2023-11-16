@@ -20,11 +20,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.example.basic.model.Article;
 import com.example.basic.model.FileInfo;
 import com.fasterxml.jackson.core.util.ByteArrayBuilder;
 
 @Controller
 public class UploadController {
+
+  @GetMapping("/article/add")
+  public String articleAdd() {
+    return "article/add";
+  }
+
+  @PostMapping("/article/add")
+  public String articleAddPost(
+    @ModelAttribute Article article,
+    @RequestParam("file") MultipartFile mFile
+  ) {
+    return "article/add";
+  }
+
 
   @GetMapping("/upload1")
   public String upload1() {
